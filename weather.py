@@ -11,7 +11,7 @@ NSW_API_BASE = "https://api.weather.gov"
 # A string that identifies your application when making HTTP requests
 USER_AGENT = "weather-app/1.0"
 
-# Helper Functions
+# _Helper Functions_
 async def make_nws_request(url: str) -> dict[str, Any] | None:
 	"""Make a request to the NSW API with proper error handling"""
 	headers = {
@@ -25,3 +25,14 @@ async def make_nws_request(url: str) -> dict[str, Any] | None:
 			return response.json()
 		except Exception:
 			return None
+
+def format_alert(feature: dict) -> str:
+	"""Format an alert feature into a readable string"""
+	props = feature["properties"]
+	return f"""
+		Event: {props.get('event', 'Unknown')}
+		Area: {props.get('areaDesc', 'Unknown')}
+		Severity: {props.get('severity', 'Unknown')}
+		Description: {props.get('description', 'No description available')}
+		Instructions: {props.get('instruction', 'No specific instructions provided')}
+	"""
