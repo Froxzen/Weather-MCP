@@ -94,3 +94,7 @@ async def get_forecast(latitude: float, longitude: float) -> str:
 		forecasts.append(forecast)
 	
 	return "\n---\n".join(forecasts)
+
+if __name__ == "__main__":
+	#Initialise and run the server
+	mcp.run(transport="stdio")
